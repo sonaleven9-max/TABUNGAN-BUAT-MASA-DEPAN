@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZK Website List</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            overflow-x: hidden;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: move 10s linear infinite;
+            z-index: -1;
+        }
+        @keyframes move {
+            0% { transform: translateX(-100px); }
+            100% { transform: translateX(100px); }
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h1, h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        .welcome {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #45a049;
+        }
+        .dashboard {
+            display: none;
+            padding: 20px;
+        }
+        .list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px;
+            width: 300px;
+            position: relative;
+            transition: transform 0.3s;
+        }
+        .item:hover {
+            transform: scale(1.05);
+        }
+        .item::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, #00ffff, #0080ff);
+            border-radius: 10px;
+            z-index: -1;
+            animation: lightning 2s infinite;
+        }
+        @keyframes lightning {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        a {
+            color: #00ffff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .rating {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .star {
+            font-size: 1.5em;
+            color: #ddd;
+            cursor: pointer;
+        }
+        .star.active {
+            color: #ffd700;
+        }
+        .question {
+            margin-top: 20px;
+        }
+        .question input, .question textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: none;
+        }
+        .counter {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="counter">Views: <span id="viewCount">0</span></div>
+    <audio id="clickSound" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"></audio> <!-- Placeholder sound, replace with actual -->
+
+    <div id="welcome" class="welcome">
+        <h1>Selamat Datang di List ZK</h1>
+        <button class="btn" onclick="enterSite()">Masuk</button>
+    </div>
+
+    <div id="mainDashboard" class="dashboard container">
+        <h2>Pilih Dashboard</h2>
+        <button class="btn" onclick="showDashboard(1)">Dashboard 1: List Website</button>
+        <button class="btn" onclick="showDashboard(2)">Dashboard 2: Link Baca Komik</button>
+    </div>
+
+    <div id="dashboard1" class="dashboard container">
+        <h2>Dashboard 1: List Website</h2>
+        <div class="list">
+            <div class="item">
+                <h3>Website Saya</h3>
+                <p>Link: <a href="https://example.com" onclick="playSound()">https://example.com</a></p> <!-- Placeholder, replace with actual URL if needed -->
+                <div class="rating">
+                    <span class="star" onclick="rate(1)">★</span>
+                    <span class="star" onclick="rate(2)">★</span>
+                    <span class="star" onclick="rate(3)">★</span>
+                    <span class="star" onclick="rate(4)">★</span>
+                    <span class="star" onclick="rate(5)">★</span>
+                </div>
+            </div>
+            <div class="item">
+                <h3>Link Grup WhatsApp</h3>
+                <p><a href="https://chat.whatsapp.com/KGNnF549njl3TmKynwYs7h" onclick="playSound()">Bergabung Grup</a></p>
+                <div class="rating">
+                    <span class="star" onclick="rate(1)">★</span>
+                    <span class="star" onclick="rate(2)">★</span>
+                    <span class="star" onclick="rate(3)">★</span>
+                    <span class="star" onclick="rate(4)">★</span>
+                    <span class="star" onclick="rate(5)">★</span>
+                </div>
+            </div>
+            <div class="item">
+                <h3>Link Saluran WhatsApp</h3>
+                <p>Ikuti saluran ZENS KOMIKINFO: <a href="https://whatsapp.com/channel/0029Vb7UnnQKLaHgWao0PQ1a" onclick="playSound()">Ikuti</a></p>
+                <div class="rating">
+                    <span class="star" onclick="rate(1)">★</span>
+                    <span class="star" onclick="rate(2)">★</span>
+                    <span class="star" onclick="rate(3)">★</span>
+                    <span class="star" onclick="rate(4)">★</span>
+                    <span class="star" onclick="rate(5)">★</span>
+                </div>
+            </div>
+            <div class="item">
+                <h3>Donasi via Dana</h3>
+                <p>Nomor: 085971864447</p>
+                <p><a href="https://link.dana.id/qr/085971864447" onclick="playSound()">Donasi Sekarang</a></p>
+                <div class="rating">
+                    <span class="star" onclick="rate(1)">★</span>
+                    <span class="star" onclick="rate(2)">★</span>
+                    <span class="star" onclick="rate(3)">★</span>
+                    <span class="star" onclick="rate(4)">★</span>
+                    <span class="star" onclick="rate(5)">★</span>
+                </div>
+            </div>
+        </div>
+        <div class="question">
+            <h3>Pertanyaan</h3>
+            <input type="text" placeholder="Nama Anda">
+            <textarea placeholder="Tulis pertanyaan Anda di sini..."></textarea>
+            <button class="btn" onclick="submitQuestion()">Kirim</button>
+        </div>
+    </div>
+
+    <div id="dashboard2" class="dashboard container">
+        <h2>Dashboard 2: Link Baca Komik</h2>
+        <div class="list">
+            <div class="item">
+                <h3>Komiku</h3>
+                <p><a href="https://komiku.id" onclick="playSound()">Baca Komik</a></p>
+                <div class="rating">
+                    <span class="star" onclick="rate(1)">★</span>
+                    <span class="star" onclick="rate(2)">★</span>
+                    <span class="star" onclick="rate(3)">★</span>
+                    <span class="star" onclick="rate(4)">★</span>
+                    <span class="star" onclick="rate(5)">★</span>
+                </div>
+            </div>
+            <!-- Tambahkan link komik lainnya jika diperlukan -->
+        </div>
+        <div class="question">
+            <h3>Pertanyaan</h3>
+            <input type="text" placeholder="Nama Anda">
+            <textarea placeholder="Tulis pertanyaan Anda di sini..."></textarea>
+            <button class="btn" onclick="submitQuestion()">Kirim</button>
+        </div>
+    </div>
+
+    <script>
+        let viewCount = localStorage.getItem('viewCount') || 0;
+        viewCount++;
+        localStorage.setItem('viewCount', viewCount);
+        document.getElementById('viewCount').textContent = viewCount;
+
+        function enterSite() {
+            document.getElementById('welcome').style.display = 'none';
+            document.getElementById('mainDashboard').style.display = 'block';
+            playSound();
+        }
+
+        function showDashboard(num) {
+            document.getElementById('mainDashboard').style.display = 'none';
+            document.getElementById('dashboard' + num).style.display = 'block';
+            playSound();
+        }
+
+        function playSound() {
+            document.getElementById('clickSound').play();
+        }
+
+        function rate(stars) {
+            const starsElements = event.target.parentElement.children;
+            for (let i = 0; i < starsElements.length; i++) {
+                if (i < stars) {
+                    starsElements[i].classList.add('active');
+                } else {
+                    starsElements[i].classList.remove('active');
+                }
+            }
+            playSound();
+        }
+
+        function submitQuestion() {
+            alert('Pertanyaan telah dikirim! Terima kasih.');
+            playSound();
+        }
+    </script>
+</body>
+</html>
